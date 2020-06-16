@@ -43,58 +43,64 @@ class Clip:
         self.ready_to_predict = False
         
     def load_responses(self, data_folder):
-        for file in os.listdir(data_folder + "/Binned_beta_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            bin_edges, bin_count, bin_uncertainty = read_binned_response(data_folder + "/Binned_beta_response/" + file)
-            data = binned_spectrum(bin_edges, bin_count, bin_uncertainty)
-            self.binned_beta_responses[filename] = data
-            
-        for file in os.listdir(data_folder + "/Binned_gamma_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            bin_edges, bin_count, bin_uncertainty = read_binned_response(data_folder + "/Binned_gamma_response/" + file)
-            data = binned_spectrum(bin_edges, bin_count, bin_uncertainty)
-            self.binned_gamma_responses[filename] = data
-            
-        for file in os.listdir(data_folder + "/Isotope_beta_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            isotope_list, isotope_activity_response, isotope_activity_uncertainty = read_isotope_response(data_folder + "/Isotope_beta_response/" + file, "decay")
-            isotope_list2, isotope_mass_response, isotope_mass_uncertainty = read_isotope_response(data_folder + "/Isotope_beta_response/" + file, "mass")
-            
-            data = isotope_response(isotope_list, isotope_activity_response, isotope_activity_uncertainty, isotope_mass_response, isotope_mass_uncertainty)
-            self.isotope_beta_responses[filename] = data
-            
-        for file in os.listdir(data_folder + "/Isotope_gamma_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            isotope_list, isotope_activity_response, isotope_activity_uncertainty = read_isotope_response(data_folder + "/Isotope_gamma_response/" + file, "decay")
-            isotope_list2, isotope_mass_response, isotope_mass_uncertainty = read_isotope_response(data_folder + "/Isotope_gamma_response/" + file, "mass")
-            
-            data = isotope_response(isotope_list, isotope_activity_response, isotope_activity_uncertainty, isotope_mass_response, isotope_mass_uncertainty)
-            self.isotope_gamma_responses[filename] = data
-            
-        for file in os.listdir(data_folder + "/Sampled_beta_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            sampled_energies, response, uncertainty = read_sampled_response(data_folder + "/Sampled_beta_response/" + file)
-            data = sampled_spectrum(sampled_energies, response, uncertainty)
-            self.sampled_beta_responses[filename] = data
-            
-        for file in os.listdir(data_folder + "/Sampled_gamma_response/"):
-            filename = file[:-4] #remove the .txt
-            
-            #Load the data and save it.
-            sampled_energies, response, uncertainty = read_sampled_response(data_folder + "/Sampled_gamma_response/" + file)
-            data = sampled_spectrum(sampled_energies, response, uncertainty)
-            self.sampled_gamma_responses[filename] = data
-            
+        if os.path.isdir(data_folder + "/Binned_beta_response/"):
+            for file in os.listdir(data_folder + "/Binned_beta_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                bin_edges, bin_count, bin_uncertainty = read_binned_response(data_folder + "/Binned_beta_response/" + file)
+                data = binned_spectrum(bin_edges, bin_count, bin_uncertainty)
+                self.binned_beta_responses[filename] = data
+        
+        if os.path.isdir(data_folder + "/Binned_gamma_response/"):
+            for file in os.listdir(data_folder + "/Binned_gamma_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                bin_edges, bin_count, bin_uncertainty = read_binned_response(data_folder + "/Binned_gamma_response/" + file)
+                data = binned_spectrum(bin_edges, bin_count, bin_uncertainty)
+                self.binned_gamma_responses[filename] = data
+         
+        if os.path.isdir(data_folder + "/Isotope_beta_response/"):
+            for file in os.listdir(data_folder + "/Isotope_beta_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                isotope_list, isotope_activity_response, isotope_activity_uncertainty = read_isotope_response(data_folder + "/Isotope_beta_response/" + file, "decay")
+                isotope_list2, isotope_mass_response, isotope_mass_uncertainty = read_isotope_response(data_folder + "/Isotope_beta_response/" + file, "mass")
+                
+                data = isotope_response(isotope_list, isotope_activity_response, isotope_activity_uncertainty, isotope_mass_response, isotope_mass_uncertainty)
+                self.isotope_beta_responses[filename] = data
+        
+        if os.path.isdir(data_folder + "/Isotope_gamma_response/"):
+            for file in os.listdir(data_folder + "/Isotope_gamma_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                isotope_list, isotope_activity_response, isotope_activity_uncertainty = read_isotope_response(data_folder + "/Isotope_gamma_response/" + file, "decay")
+                isotope_list2, isotope_mass_response, isotope_mass_uncertainty = read_isotope_response(data_folder + "/Isotope_gamma_response/" + file, "mass")
+                
+                data = isotope_response(isotope_list, isotope_activity_response, isotope_activity_uncertainty, isotope_mass_response, isotope_mass_uncertainty)
+                self.isotope_gamma_responses[filename] = data
+        
+        if os.path.isdir(data_folder + "/Sampled_beta_response/"):        
+            for file in os.listdir(data_folder + "/Sampled_beta_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                sampled_energies, response, uncertainty = read_sampled_response(data_folder + "/Sampled_beta_response/" + file)
+                data = sampled_spectrum(sampled_energies, response, uncertainty)
+                self.sampled_beta_responses[filename] = data
+           
+        if os.path.isdir(data_folder + "/Sampled_gamma_response/"):
+            for file in os.listdir(data_folder + "/Sampled_gamma_response/"):
+                filename = file[:-4] #remove the .txt
+                
+                #Load the data and save it.
+                sampled_energies, response, uncertainty = read_sampled_response(data_folder + "/Sampled_gamma_response/" + file)
+                data = sampled_spectrum(sampled_energies, response, uncertainty)
+                self.sampled_gamma_responses[filename] = data
+                
         print("Clip initialization: loaded " + str(len(self.binned_beta_responses)) + " binned beta responses.")
         print("Clip initialization: loaded " + str(len(self.binned_gamma_responses)) + " binned gamma responses.")
         print("Clip initialization: loaded " + str(len(self.isotope_beta_responses)) + " isotope beta responses.")
