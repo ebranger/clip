@@ -26,7 +26,7 @@ def convert_to_ORIGEN_binning(spectrum_energies, spectrum_counts, bin_edges):
             
             #get the right bin
             for bin in range(0,number_of_bins):
-                if bin_edges[bin] <= energy and energy <= bin_edges[bin+1]:
+                if bin_edges[bin] <= energy and energy < bin_edges[bin+1]:
                     
                     bin_mid_energy = (bin_edges[bin] + bin_edges[bin+1])/2
                     
