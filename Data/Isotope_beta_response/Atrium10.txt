@@ -1,0 +1,5 @@
+Isotope	Cherenkov/decay	Uncertainty	Cherenkov/gram	Uncertainty
+Sr90	2.71E-05	5.84E-07	1.38E+08	2.98E+06
+Ru106	3.87E-04	1.89E-08	4.87E+10	2.37E+06
+Ce144	1.56E-04	6.50E-09	1.85E+10	7.68E+05
+
